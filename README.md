@@ -1,56 +1,74 @@
-# Welcome to your Expo app 👋
+# CDT Clone - React Native App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este projeto é uma aplicação móvel desenvolvida em **React Native** com **Expo**, simulando a interface e funcionalidades da **Carteira Digital de Trânsito (CDT)**.
 
-## Get started
+## 📱 Sobre o Aplicativo
 
-1. Install dependencies
+O aplicativo replica o fluxo de autenticação e exibição de documentos da CDT. Ele utiliza uma estrutura moderna baseada em componentes e rotas.
 
-   ```bash
-   npm install
-   ```
+### Como Funciona (Fluxo Principal)
 
-2. Start the app
+1.  **Inicialização (`app/index.tsx`):**
+    *   Ao abrir, o app verifica se existem dados de usuário salvos localmente (`storage`).
+    *   **Se existir:** Redireciona automaticamente para o menu principal (`/app/menu`).
+    *   **Se não existir:** Exibe a tela de entrada (`EntryScreen`).
 
-   ```bash
-   npx expo start
-   ```
+2.  **Autenticação (`components/Templates/LoginWithGov`):**
+    *   Simula o fluxo de login do **gov.br**.
+    *   O usuário insere CPF e Senha.
+    *   O app faz uma requisição POST para a API configurada (`/cnh/consultar/login`).
+    *   Se o login for bem-sucedido, os dados da CNH retornados são salvos no dispositivo e o usuário acessa o app.
 
-In the output, you'll find options to open the app in a
+3.  **Estrutura de Pastas:**
+    *   `app/`: Contém as rotas e telas (baseado no **Expo Router**). Cada arquivo aqui vira uma tela navegável.
+    *   `components/`: Componentes visuais organizados em **Atomic Design** (Molecules, Organisms, Templates).
+    *   `utils/`: Lógica de utilitários, como conexão com API (`api.ts`) e armazenamento local (`storage.ts`).
+    *   `assets/`: Imagens e fontes.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🛠 Tecnologias Utilizadas
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+*   **React Native** & **Expo**: Framework principal de desenvolvimento.
+*   **TypeScript**: Linguagem utilizada (JavaScript tipado).
+*   **Expo Router**: Gerenciamento de navegação entre telas.
+*   **Styled Components**: Para estilização dos componentes.
+*   **Axios**: Para requisições HTTP (conexão com o servidor).
 
-## Get a fresh project
+## 🚀 Como Rodar o Projeto
 
-When you're ready, run:
+Como você prefere comandos simples, foi criado um arquivo `Makefile` na raiz. Você precisará ter o **Node.js** instalado no seu computador.
 
-```bash
-npm run reset-project
-```
+### Comandos Simplificados (Makefile)
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Abra o terminal na pasta do projeto e use:
 
-## Learn more
+1.  **Instalar dependências (faça isso na primeira vez):**
+    ```bash
+    make setup
+    ```
 
-To learn more about developing your project with Expo, look at the following resources:
+2.  **Rodar o aplicativo (Geral):**
+    ```bash
+    make start
+    ```
+    *Isso abrirá um menu onde você pode escolher rodar no Simulador iOS (pressione `i`) ou Android (pressione `a`).*
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+3.  **Rodar direto no Android:**
+    ```bash
+    make android
+    ```
 
-## Join the community
+4.  **Rodar direto no iOS (apenas Mac):**
+    ```bash
+    make ios
+    ```
 
-Join our community of developers creating universal apps.
+5.  **Limpar o projeto (se der erro):**
+    ```bash
+    make clean
+    ```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📝 Notas para Modificação
 
-  elevation: 2;
-  shadow-color: #000;
-  shadow-offset: 0px 2px;
-  shadow-opacity: 0.1;
-  shadow-radius: 2px;
+*   **API:** A URL da API está definida em `utils/api.ts`.
+*   **Cores e Temas:** Verifique `constants/Colors.ts`.
+*   **Telas:** Se quiser mudar o visual de uma tela específica, procure o arquivo correspondente dentro de `app/` ou o template em `components/Templates`.
