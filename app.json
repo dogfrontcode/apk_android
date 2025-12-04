@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "cdt",
+    "slug": "cdt",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/images_cdt/cdt_logo_sem_nome.png",
+    "scheme": "cdt",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/images_cdt/cdt_logo_sem_nome.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.fenol64.cdt"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/images_cdt/cdt_logo_sem_nome.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/images_cdt/cdt_logo_sem_nome.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "3caffd26-3c81-47c3-86ec-1fa37592b445"
+      }
+    }
+  }
+}
