@@ -6,7 +6,7 @@ import { Api } from "@/utils/api";
 import storage from '@/utils/storage';
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 // import { Container } from './styles';
 
@@ -27,8 +27,12 @@ const LoginWithGov: React.FC = () => {
             await storage.setItem('user_data', data.cnh);
 
             router.push("/app/menu");
-        } catch (error) {
-            // Handle error appropriately, e.g., show a message to the user
+        } catch (error: any) {
+            console.error(error);
+            Alert.alert(
+                "Erro no Login",
+                error.response?.data?.message || "Ocorreu um erro ao tentar fazer login. Verifique seus dados."
+            );
         }
     };
 

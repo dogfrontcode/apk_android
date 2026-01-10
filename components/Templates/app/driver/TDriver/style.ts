@@ -18,8 +18,7 @@ export const Container = styled.View`
 export const InfoContainer = styled.View`
   background-color: white;
   border-radius: 10px;
-  flex: 1;
-  padding: 10px 20px 0 20px;
+  padding: 10px 20px 20px 20px;
   margin: 30px 0 20px 0;
   width: 95%;
 `;
