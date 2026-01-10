@@ -14,7 +14,7 @@ const data = [
     <Document.Sign />,
     <Document.QRcode />
 ];
-const width = Dimensions.get("window").width;
+const width = Dimensions.get("window").width * 0.85;
 
 function App() {
   const ref = React.useRef<ICarouselInstance>(null);
@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <View style={{ flex: 1, marginBottom: 20 }}>
+    <View style={{ flex: 1, marginBottom: 20, width: width, alignSelf: "center" }}>
       <Carousel
         ref={ref}
         width={width}

@@ -20,7 +20,7 @@ const Document: React.FC<DocumentProps> & {
 };
 
 Document.Front = () => {
-  const { width } = Dimensions.get("window");
+  const width = Dimensions.get("window").width * 0.85;
   // Imagem original: 673x496 (proporção 1.357:1)
   // Como a imagem está rotacionada 90°, a proporção fica 496:673 = 0.737
   const cnh_height = 800; // Altura proporcional baseada nas dimensões reais
@@ -51,7 +51,7 @@ Document.Front = () => {
   );
 };
 Document.Back = () => {
-  const { width } = Dimensions.get("window");
+  const width = Dimensions.get("window").width * 0.85;
   // Imagem original: 673x496 (proporção 1.357:1)
   // Como a imagem está rotacionada 90°, a proporção fica 496:673 = 0.737
   const cnh_height = 800; // Altura proporcional baseada nas dimensões reais
@@ -83,7 +83,7 @@ Document.Back = () => {
 };
 
 Document.Sign = () => {
-  const { width } = Dimensions.get("window");
+  const width = Dimensions.get("window").width * 0.85;
   const [photo_base64, setPhotoBase64] = React.useState<string | null>(null);
 
   useEffect(() => {
@@ -112,7 +112,7 @@ Document.Sign = () => {
 };
 
 Document.QRcode = () => {
-  const { width } = Dimensions.get("window");
+  const width = Dimensions.get("window").width * 0.85;
   const [photo_base64, setPhotoBase64] = React.useState<string | null>(null);
 
   useEffect(() => {
