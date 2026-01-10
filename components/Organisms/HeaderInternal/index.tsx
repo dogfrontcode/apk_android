@@ -29,7 +29,11 @@ const Header: FC<IHeaderInternalProps> = ({
     <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BackIconWrapper onPress={() => {
-                router.back();
+                if (router.canGoBack()) {
+                    router.back();
+                } else {
+                    router.replace('/app/menu');
+                }
             }}>
                 <Feather name="chevron-left" size={24} color="white" />
             </BackIconWrapper>
