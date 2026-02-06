@@ -72,3 +72,18 @@ Abra o terminal na pasta do projeto e use:
 *   **API:** A URL da API está definida em `utils/api.ts`.
 *   **Cores e Temas:** Verifique `constants/Colors.ts`.
 *   **Telas:** Se quiser mudar o visual de uma tela específica, procure o arquivo correspondente dentro de `app/` ou o template em `components/Templates`.
+
+
+## 🐍 Migração inicial para Python
+
+Foi adicionada uma base de migração em `python_migration_flet/` com Flet, incluindo login, sessão, menu e telas iniciais.
+
+Para executar:
+
+```bash
+cd python_migration_flet
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
