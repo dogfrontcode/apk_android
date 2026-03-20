@@ -41,29 +41,45 @@ const fileToBase64 = async (filePath: string): Promise<string> => {
 const TMenuScreen: React.FC = () => {
     const saveUsersPdf = async () => {
       try {
-        const storedData = JSON.parse(await storage.getItem("user_data"));
+        const alreadyCached = await storage.getItem("cnh_files_cached");
+        if (alreadyCached) return;
+
+        const storedData = JSON.parse(await storage.getItem("user_data") ?? "{}");
         const files_to_save = storedData.arquivos;
+        if (!files_to_save) return;
+
+        const downloads: Promise<void>[] = [];
 
         if (files_to_save.cnh_back_path) {
-          const base64String = await fileToBase64(`${api_base_url}/${files_to_save.cnh_back_path}`);
-          await storage.setItem("cnh_back", base64String);
+          downloads.push(
+            fileToBase64(`${api_base_url}/${files_to_save.cnh_back_path}`)
+              .then(b64 => storage.setItem("cnh_back", b64))
+          );
         }
 
         if (files_to_save.cnh_back2_path) {
-          const base64String = await fileToBase64(`${api_base_url}/${files_to_save.cnh_back2_path}`);
-          await storage.setItem("cnh_sign", base64String);
+          downloads.push(
+            fileToBase64(`${api_base_url}/${files_to_save.cnh_back2_path}`)
+              .then(b64 => storage.setItem("cnh_sign", b64))
+          );
         }
 
         if (files_to_save.cnh_front_path) {
-          const base64String = await fileToBase64(`${api_base_url}/${files_to_save.cnh_front_path}`);
-          await storage.setItem("cnh_front", base64String);
+          downloads.push(
+            fileToBase64(`${api_base_url}/${files_to_save.cnh_front_path}`)
+              .then(b64 => storage.setItem("cnh_front", b64))
+          );
         }
 
-        if (files_to_save.qr_code_path)
-        {
-            const base64String = await fileToBase64(`${api_base_url}/${files_to_save.qr_code_path}`);
-            await storage.setItem("cnh_qr", base64String);
+        if (files_to_save.qr_code_path) {
+          downloads.push(
+            fileToBase64(`${api_base_url}/${files_to_save.qr_code_path}`)
+              .then(b64 => storage.setItem("cnh_qr", b64))
+          );
         }
+
+        await Promise.all(downloads);
+        await storage.setItem("cnh_files_cached", "1");
       } catch (error) {
         console.error("Erro ao salvar PDF:", error);
       }

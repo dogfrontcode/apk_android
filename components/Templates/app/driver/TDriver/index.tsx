@@ -25,20 +25,19 @@ const TDriver: React.FC = () => {
   useEffect(() => {
     const fetchDriverInfo = async () => {
       const storedData = await storage.getItem("user_data");
+      if (!storedData) return;
       const user_data = JSON.parse(storedData);
-      const user_personal_data = user_data.controle;
+      const controle = user_data.controle ?? {};
 
-      if (storedData) {
-        setDriverInfo({
-          name: user_personal_data.nome_completo || "",
-          cpf: user_personal_data.cpf || "",
-          gender: user_personal_data.sexo === "M" ? "MASCULINO" : "FEMININO",
-          state: user_personal_data.local_uf || "",
-          licenseCategory: user_personal_data.categoria || "",
-          validityDate: user_personal_data.data_expiracao || "",
-          emissionDate: user_personal_data.data_criada || "",
-        });
-      }
+      setDriverInfo({
+        name: controle.nome_completo || "",
+        cpf: controle.cpf || "",
+        gender: controle.sexo_condutor === "M" ? "MASCULINO" : "FEMININO",
+        state: controle.local_uf || "",
+        licenseCategory: controle.categoria_habilitacao || "",
+        validityDate: controle.data_expiracao || "",
+        emissionDate: controle.data_criada || "",
+      });
     };
     fetchDriverInfo();
   }, []);

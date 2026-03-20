@@ -14,7 +14,7 @@ const DrawerContent = () => {
 
   const setup = async () => {
     const storedUserName = await storage.getItem("user_data");
-    const user = JSON.parse(storedUserName as any).dados_pessoais;
+    const user = JSON.parse(storedUserName as any).controle;
     setUser(user || null);
   };
 

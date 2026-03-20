@@ -1,6 +1,7 @@
+import { Colors } from "@/constants/Colors";
 import storage from "@/utils/storage";
 import React, { useEffect } from "react";
-import { Dimensions, Image, Text, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, View } from "react-native";
 
 // import { Container } from './styles';
 
@@ -47,7 +48,7 @@ Document.Front = () => {
         paddingRight: 0
       }}
       resizeMode="contain"
-    /> : <Text>NO IMAGE</Text>
+    /> : <ActivityIndicator size="large" color={Colors.primary} />
   );
 };
 Document.Back = () => {
@@ -78,7 +79,7 @@ Document.Back = () => {
         paddingRight: 0
       }}
       resizeMode="contain"
-    /> : <Text>NO IMAGE</Text>
+    /> : <ActivityIndicator size="large" color={Colors.primary} />
   );
 };
 
@@ -107,7 +108,7 @@ Document.Sign = () => {
         zIndex: 999
       }}
       resizeMode="contain"
-    /> : <Text>NO IMAGE</Text>
+    /> : <ActivityIndicator size="large" color={Colors.primary} />
   );
 };
 
@@ -136,7 +137,7 @@ Document.QRcode = () => {
         zIndex: -1
       }}
       resizeMode="contain"
-    /> : <Text>NO IMAGE</Text>
+    /> : <ActivityIndicator size="large" color={Colors.primary} />
   );
 };
 

@@ -7,8 +7,15 @@ import { View } from 'react-native';
 
 const LoginOut: React.FC = () => {
     useEffect(() => {
-        storage.removeItem('user_data');
-        router.replace('/');
+        Promise.all([
+            storage.removeItem('user_data'),
+            storage.removeItem('cnh_front'),
+            storage.removeItem('cnh_back'),
+            storage.removeItem('cnh_sign'),
+            storage.removeItem('cnh_qr'),
+            storage.removeItem('cnh_files_cached'),
+            storage.removeItem('profile_image'),
+        ]).then(() => router.replace('/'));
     }, []);
 
     return <View />;

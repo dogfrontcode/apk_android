@@ -8,12 +8,14 @@ import Carousel, {
     Pagination,
 } from "react-native-reanimated-carousel";
 
-const data = [
-    <Document.Front />,
-    <Document.Back />,
-    <Document.Sign />,
-    <Document.QRcode />
-];
+type SlideKey = 'front' | 'back' | 'sign' | 'qr';
+const data: SlideKey[] = ['front', 'back', 'sign', 'qr'];
+const slideComponents: Record<SlideKey, React.FC> = {
+    front: Document.Front,
+    back: Document.Back,
+    sign: Document.Sign,
+    qr: Document.QRcode,
+};
 const width = Dimensions.get("window").width * 0.85;
 
 function App() {
@@ -23,7 +25,7 @@ function App() {
   const onPressPagination = (index: number) => {
     ref.current?.scrollTo({
       count: index,
-      animated: false, // Disable animation when changing slides via pagination
+      animated: false,
     });
   };
 
@@ -36,7 +38,10 @@ function App() {
         autoPlay={false}
         data={data}
         onProgressChange={progress}
-        renderItem={({ item }) => <View style={{ height: width * 1.5 , justifyContent: "center", alignItems: "center" }} >{item}</View>}
+        renderItem={({ item }) => {
+          const SlideComponent = slideComponents[item];
+          return <View style={{ height: width * 1.5, justifyContent: "center", alignItems: "center" }}><SlideComponent /></View>;
+        }}
         loop={false}
       />
 

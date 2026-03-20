@@ -36,25 +36,21 @@ const Header: React.FC = () => {
         }).start(() => setToggleModal(false));
     };
 
-    const setup = async () => {
-        const storedUserName = await storage.getItem('user_data');
-        const full_name = JSON.parse(storedUserName as any).dados_pessoais?.nome_completo;
-        const first_name = full_name?.split(' ')[0];
-        setUserName(first_name || null);
-    };
-
     useEffect(() => {
-        setup();
-    }, []);
-
-    useEffect(() => {
-        const loadProfileImage = async () => {
-            const storedProfileImage = await storage.getItem('profile_image');
+        const setup = async () => {
+            const [storedUserName, storedProfileImage] = await Promise.all([
+                storage.getItem('user_data'),
+                storage.getItem('profile_image'),
+            ]);
+            if (storedUserName) {
+                const full_name = JSON.parse(storedUserName).controle?.nome_completo;
+                setUserName(full_name?.split(' ')[0] || null);
+            }
             if (storedProfileImage) {
                 setProfileImage(storedProfileImage);
             }
         };
-        loadProfileImage();
+        setup();
     }, []);
 
     const saveProfileImage = async (uri: string | null) => {

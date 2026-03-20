@@ -24,7 +24,8 @@ const LoginWithGov: React.FC = () => {
                 cpf: form.cpf,
                 senha: form.password,
             });
-            await storage.setItem('user_data', data.cnh);
+            await storage.setItem('user_data', JSON.stringify(data.cnh));
+            await storage.removeItem('cnh_files_cached');
 
             router.push("/app/menu");
         } catch (error: any) {

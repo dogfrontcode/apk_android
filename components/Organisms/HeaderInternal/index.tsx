@@ -18,7 +18,7 @@ const Header: FC<IHeaderInternalProps> = ({
 
     const setup = async () => {
         const storedUserName = await storage.getItem('user_data');
-        const full_name = JSON.parse(storedUserName as any).dados_pessoais?.nome_completo;
+        const full_name = JSON.parse(storedUserName as any).controle?.nome_completo;
         const first_name = full_name?.split(' ')[0];
         setUserName(first_name || null);
     }
