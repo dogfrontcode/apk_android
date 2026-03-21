@@ -6,7 +6,11 @@ class StorageService {
     if (Platform.OS === "web") {
       return localStorage.getItem(key);
     } else {
-      return Storage.getItem({ key });
+      try {
+        return await Storage.getItem({ key });
+      } catch {
+        return null;
+      }
     }
   }
 
@@ -22,7 +26,11 @@ class StorageService {
     if (Platform.OS === "web") {
       localStorage.removeItem(key);
     } else {
-      await Storage.removeItem({ key });
+      try {
+        await Storage.removeItem({ key });
+      } catch {
+        // key doesn't exist, ignore
+      }
     }
   }
 }
