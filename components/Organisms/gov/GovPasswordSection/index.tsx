@@ -1,14 +1,14 @@
 import { Row } from '@/components/Templates/EntryScreen/style';
 import { Colors } from '@/constants/Colors';
 import React, { FC } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { IGovSectionProps } from '../GovCpfSection/interface';
 import { GovButton, GovButtonOutline } from '../GovCpfSection/style';
 import { GovText, Input } from '../GovNavbar/styles';
 
 // import { Container } from './styles';
 
-const GovPasswordSection: FC<IGovSectionProps> = ({ formState, onSubmit }) => {
+const GovPasswordSection: FC<IGovSectionProps> = ({ formState, onSubmit, errorMessage }) => {
     const [form, setFormState] = formState;
 
   return (
@@ -50,6 +50,11 @@ const GovPasswordSection: FC<IGovSectionProps> = ({ formState, onSubmit }) => {
             </GovText>
         </GovButton>
         </Row>
+        {errorMessage && (
+            <Text style={{ color: 'red', fontSize: 11, textAlign: 'center', marginTop: 10 }}>
+                {errorMessage}
+            </Text>
+        )}
     </View>
   );
 }
